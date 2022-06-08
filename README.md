@@ -6,7 +6,7 @@
 # Ground rules of project
 - different branches
     - dev
-        -<feature>_<name>
+        -< feature >_< name >
     - production
 - Choose a dataset and problem that is manageable: literature review
 - Solidify all datasets -> split the work 
