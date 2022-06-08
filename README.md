@@ -17,11 +17,13 @@
     - FastAPI
         - Preprocess endpoint
         - train endpoint - CHANGED
+        - train endpoint (hello world)
         - infer endpoint
     - Final interation through UI (Usage/inference) 
         - streamlit need to call on your API
             - Going to have input form (file uploader or free form of your choice)
             - Send the data into the preprocess endpoint and forward into inference   
+- bye bye
 
 # Authors
 Members
