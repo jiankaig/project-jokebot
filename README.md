@@ -16,7 +16,7 @@
         - Model (if SOTA already exists, transfer learn)
     - FastAPI
         - Preprocess endpoint
-        - train endpoint
+        - train endpoint - CHANGED
         - infer endpoint
     - Final interation through UI (Usage/inference) 
         - streamlit need to call on your API
