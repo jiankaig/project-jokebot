@@ -2,6 +2,7 @@ import os
 import logging
 import hydra
 import streamlit as st
+import uvicorn
 
 import aiap_team_7_project_jokebot as jokebot
 
@@ -37,6 +38,7 @@ def main(args):
 
     if st.button("Get sentiment"):
         logger.info("Conducting inferencing on text input...")
+        # TODO: curr_pred_result
         curr_pred_result = float(pred_model.predict([text_input])[0])
         sentiment = ("positive" if curr_pred_result > 0.5
                     else "negative")
@@ -50,3 +52,4 @@ def main(args):
 
 if __name__ == "__main__":
     main()
+    uvicorn.run("aiap_team_7_project_jokebot_fastapi:APP", host="0.0.0.0", port=8080)

@@ -1,3 +1,5 @@
 .history/*
 data/*
 .DS_Store
+outputs/*
+.vscode/*
