@@ -1,12 +1,20 @@
 <img src='./imgs/AIAP-Banner.png'>
 
 # Team 7 (FL Bricks)
- Miniproject for Team 7 (FL Bricks)
+ This repo is used to document the mini-project for Team 7 (FL Bricks) where we deploy a pre-trained humour recognition model using a Streamlit app
 
-# Ground rules of project
-- different branches
+ # Pipeline
+
+ <img src='./imgs/flowchart.png'>
+
+# Resources
+- streamlit app: TODO
+- gsutil bucket: gs://aiap-team-7-project-jokebot 
+# Ground rules for project
+- Initialised different branches for different features
+    - main
     - dev
-        -< feature >_< name >
+        - < feature >_< name working on feature>
     - production
 - Choose a dataset and problem that is manageable: literature review
 - Solidify all datasets -> split the work 
@@ -23,7 +31,8 @@
             - Going to have input form (file uploader or free form of your choice)
             - Send the data into the preprocess endpoint and forward into inference   
 
-
+# References
+- [Humor recognition using deep learning](https://aclanthology.org/N18-2018.pdf)
 # Authors
 Members
 - Benjamin
