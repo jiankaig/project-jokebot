@@ -1,5 +1,6 @@
 .history/*
 data/*
 .DS_Store
+models/*
 outputs/*
 .vscode/*
