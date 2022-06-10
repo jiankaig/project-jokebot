@@ -34,14 +34,6 @@ def main(args):
     )
     jokebot.general_utils.setup_logging(logger_config_path)
 
-    model_type = args["inference"]["modeL_type"]
-    model_path = os.path.join(
-        hydra.utils.get_original_cwd(), args["inference"]["model_path"]
-    )
-
-    # logger.info("Loading the model...")
-    # pred_model = load_model(model_type, model_path)
-
     logger.info("Loading dashboard...")
     title = st.title("AIAP Team 7 Project Jokebot")
 
