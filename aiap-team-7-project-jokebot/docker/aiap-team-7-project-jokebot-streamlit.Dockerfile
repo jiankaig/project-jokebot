@@ -12,13 +12,10 @@ ARG CONDA_HOME="/miniconda3"
 ARG CONDA_BIN="$CONDA_HOME/bin/conda"
 ARG MINI_CONDA_SH="Miniconda3-latest-Linux-x86_64.sh"
 
-ARG PRED_MODEL_UUID
-RUN test -n "$PRED_MODEL_UUID"
 
-ARG PRED_MODEL_GCS_URI="gs://aiap-team-7-project-jokebot-artifacts/mlflow-tracking-server/team_7/$PRED_MODEL_UUID"
+ARG PRED_MODEL_GCS_URI="gs://aiap-team-7-project-jokebot/models"
+ARG PRED_MODEL_PATH="$HOME_DIR/$CONDA_ENV_NAME/models/colbert-trained"
 
-ARG PRED_MODEL_PATH="$HOME_DIR/from-gcs/$PRED_MODEL_UUID/artifacts/model/data/model"
-ENV PRED_MODEL_UUID=$PRED_MODEL_UUID
 ENV PRED_MODEL_GCS_URI=$PRED_MODEL_GCS_URI
 ENV PRED_MODEL_PATH=$PRED_MODEL_PATH
 
@@ -73,7 +70,6 @@ RUN $CONDA_BIN env create -f aiap-team-7-project-jokebot/$CONDA_ENV_FILE && \
     $CONDA_BIN clean -a -y && \
     echo "source activate $CONDA_ENV_NAME" >> "$HOME_DIR/.bashrc"
 
-WORKDIR $HOME_DIR/aiap-team-7-project-jokebot
-RUN chmod -R +x scripts
+
 
 ENTRYPOINT [ "/bin/bash", "./scripts/dashboard/streamlit-entrypoint.sh" ]

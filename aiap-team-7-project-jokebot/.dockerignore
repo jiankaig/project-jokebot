@@ -8,7 +8,6 @@ conf/**/*credentials*
 # Ignore everything in the following folders
 data
 logs
-models
 aisg-context/k8s/pvc
 aisg-context/k8s/secrets
 
