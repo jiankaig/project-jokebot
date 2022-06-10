@@ -36,16 +36,11 @@ def predict_sentiment(joke_text: jokebot_fapi.schemas.InferJoke):
         A 500 status error is returned if the prediction steps
         encounters any errors.
     """
-    result_dict = {"data": []}
     result=""
     try:
         logger.info("Generating humour sentiments for .")
-        
-        # curr_pred_result = PRED_MODEL.predict(joke_text)
-        curr_pred_result = 0.9
-        sentiment = ("positive" if curr_pred_result > 0.5
-                    else "negative")
-        result = sentiment
+        logger.info(f"[DEBUG] joke: {joke_text.joke}")
+        score = PRED_MODEL.predict(joke_text.joke)
         logger.info("Joke Sentiment generated for Humour ")
 
     except Exception as error:
@@ -53,7 +48,7 @@ def predict_sentiment(joke_text: jokebot_fapi.schemas.InferJoke):
         raise fastapi.HTTPException(
             status_code=500, detail="Internal server error.")
 
-    return result
+    return {"data": {"score": str(score)}}
 
 
 @ROUTER.get("/version", status_code=fastapi.status.HTTP_200_OK)

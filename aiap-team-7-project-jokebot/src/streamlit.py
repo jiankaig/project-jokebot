@@ -4,6 +4,7 @@ import hydra
 import streamlit as st
 import uvicorn
 from PIL import Image
+import requests
 
 import aiap_team_7_project_jokebot as jokebot
 
@@ -38,8 +39,8 @@ def main(args):
         hydra.utils.get_original_cwd(), args["inference"]["modelpath"]
     )
 
-    logger.info("Loading the model...")
-    pred_model = load_model(model_type, model_path)
+    # logger.info("Loading the model...")
+    # pred_model = load_model(model_type, model_path)
 
     logger.info("Loading dashboard...")
     title = st.title("AIAP Team 7 Project Jokebot")
@@ -53,9 +54,10 @@ def main(args):
 
     if get_humour_sentiment:
         logger.info("Conducting inferencing on text input...")
-        # TODO: curr_pred_result
         waiting_text.text("Waiting for the slow model to provide a response...")
-        humour_level = pred_model.predict(text_input)
+        ret = requests.post("http://127.0.0.1:8000/api/v1/model/predict", json={'joke' : text_input}).json()
+        humour_level = float(ret["data"].get("score"))
+        print(f"humour_level:{humour_level}, type:{type(humour_level)}")
         waiting_text.text("")
         humour_percent = "{:.0%}".format(humour_level)
         logger.info(
