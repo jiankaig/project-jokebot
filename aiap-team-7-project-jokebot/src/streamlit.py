@@ -4,6 +4,7 @@ import hydra
 import streamlit as st
 import uvicorn
 from PIL import Image
+
 import aiap_team_7_project_jokebot as jokebot
 
 GIF_FUNNY = "https://i.gifer.com/4j.gif"
