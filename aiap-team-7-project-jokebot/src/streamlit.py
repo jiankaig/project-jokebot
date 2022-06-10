@@ -52,4 +52,3 @@ def main(args):
 
 if __name__ == "__main__":
     main()
-    uvicorn.run("aiap_team_7_project_jokebot_fastapi:APP", host="0.0.0.0", port=8080)
