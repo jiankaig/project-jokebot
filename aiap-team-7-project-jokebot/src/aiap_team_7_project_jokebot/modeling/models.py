@@ -8,7 +8,7 @@ from transformers import BertTokenizer
 from tqdm.notebook import tqdm
 import nltk
 
-nltk.download("punkt")
+# nltk.download("punkt")
 from nltk.tokenize import sent_tokenize
 import logging
 

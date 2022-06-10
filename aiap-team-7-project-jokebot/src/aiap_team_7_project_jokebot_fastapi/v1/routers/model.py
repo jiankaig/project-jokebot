@@ -7,7 +7,7 @@ logger = logging.getLogger(__name__)
 
 
 ROUTER = fastapi.APIRouter()
-PRED_MODEL = jokebot_fapi.deps.PRED_MODEL_CUSTOM
+# PRED_MODEL = jokebot_fapi.deps.PRED_MODEL_CUSTOM
 
 
 @ROUTER.post("/predict", status_code=fastapi.status.HTTP_200_OK)
@@ -41,7 +41,8 @@ def predict_sentiment(joke_text: jokebot_fapi.schemas.InferJoke):
     try:
         logger.info("Generating humour sentiments for .")
         
-        curr_pred_result = PRED_MODEL.predict(joke_text)
+        # curr_pred_result = PRED_MODEL.predict(joke_text)
+        curr_pred_result = 0.9
         sentiment = ("positive" if curr_pred_result > 0.5
                     else "negative")
         result = sentiment

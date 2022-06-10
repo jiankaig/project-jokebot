@@ -2,7 +2,6 @@ import os
 import logging
 import hydra
 import streamlit as st
-import uvicorn
 
 import aiap_team_7_project_jokebot as jokebot
 
