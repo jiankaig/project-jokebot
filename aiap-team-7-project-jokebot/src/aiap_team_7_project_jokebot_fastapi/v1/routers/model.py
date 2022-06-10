@@ -7,7 +7,7 @@ logger = logging.getLogger(__name__)
 
 
 ROUTER = fastapi.APIRouter()
-# PRED_MODEL = jokebot_fapi.deps.PRED_MODEL_CUSTOM
+PRED_MODEL = jokebot_fapi.deps.PRED_MODEL_CUSTOM
 
 
 @ROUTER.post("/predict", status_code=fastapi.status.HTTP_200_OK)
