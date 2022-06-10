@@ -20,5 +20,5 @@ train:
 
 inference:
   modeLtype: "bert-base-uncased"
-  modelpath: "../models/colbert-trained"
+  modelpath: "models/colbert-trained"
 
