@@ -6,9 +6,11 @@ import uvicorn
 
 import aiap_team_7_project_jokebot as jokebot
 
+
 @st.cache(allow_output_mutation=True)
-def load_model(model_path):
-    return jokebot.modeling.utils.load_model(model_path)
+def load_model(model_type, model_path):
+    return jokebot.modeling.models.HumourRecognitionModel(model_type, model_path)
+
 
 @hydra.main(config_path="../conf/base", config_name="pipelines.yml")
 def main(args):
@@ -22,33 +24,38 @@ def main(args):
 
     logger = logging.getLogger(__name__)
     logger.info("Setting up logging configuration.")
-    logger_config_path = os.path.\
-        join(hydra.utils.get_original_cwd(),
-            "conf/base/logging.yml")
+    logger_config_path = os.path.join(
+        hydra.utils.get_original_cwd(), "conf/base/logging.yml"
+    )
     jokebot.general_utils.setup_logging(logger_config_path)
 
+    model_type = args["inference"]["modeLtype"]
+    model_path = os.path.join(
+        hydra.utils.get_original_cwd(), args["inference"]["modelpath"]
+    )
+
     logger.info("Loading the model...")
-    pred_model = load_model(args["inference"]["model_path"])
+    pred_model = load_model(model_type, model_path)
 
     logger.info("Loading dashboard...")
-    title = st.title('AIAP Team 7 Project Jokebot')
+    title = st.title("AIAP Team 7 Project Jokebot")
 
-    text_input = st.text_area("Review",
-        placeholder="Insert your review here")
+    text_input = st.text_area("Review", placeholder="Insert your jokes here")
 
-    if st.button("Get sentiment"):
+    if st.button("Get humour sentiment"):
         logger.info("Conducting inferencing on text input...")
         # TODO: curr_pred_result
-        curr_pred_result = float(pred_model.predict([text_input])[0])
-        sentiment = ("positive" if curr_pred_result > 0.5
-                    else "negative")
+
+        sentiment = pred_model.predict(text_input)
+        # curr_pred_result = float(pred_model.predict([text_input])[0])
+        # sentiment = "positive" if curr_pred_result > 0.5 else "negative"
         logger.info(
-            "Inferencing has completed. Text input: {}. Sentiment: {}"
-            .format(text_input, sentiment))
-        st.write("The sentiment of the review is {}."
-            .format(sentiment))
+            f"Inferencing has completed. Text input: {text_input}. Sentiment: {sentiment}"
+        )
+        st.write(f"The sentiment of the joke is {sentiment}.")
     else:
         st.write("Awaiting a review...")
+
 
 if __name__ == "__main__":
     main()
