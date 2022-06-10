@@ -37,7 +37,6 @@ def main(args):
     model_path = os.path.join(
         hydra.utils.get_original_cwd(), args["inference"]["modelpath"]
     )
-    imgs = os.path.join(hydra.utils.get_original_cwd(), args["inference"]["imgs"])
 
     logger.info("Loading the model...")
     pred_model = load_model(model_type, model_path)
