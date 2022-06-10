@@ -19,6 +19,6 @@ train:
   pretrained_embedding: "https://tfhub.dev/google/nnlm-en-dim128-with-normalization/2"
 
 inference:
-  modeLtype: "bert-base-uncased"
-  modelpath: "../models/colbert-trained"
+  modeL_type: "bert-base-uncased"
+  model_path: "../models/colbert-trained"
 

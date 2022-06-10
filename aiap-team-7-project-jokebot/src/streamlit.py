@@ -33,9 +33,9 @@ def main(args):
     )
     jokebot.general_utils.setup_logging(logger_config_path)
 
-    model_type = args["inference"]["modeLtype"]
+    model_type = args["inference"]["modeL_type"]
     model_path = os.path.join(
-        hydra.utils.get_original_cwd(), args["inference"]["modelpath"]
+        hydra.utils.get_original_cwd(), args["inference"]["model_path"]
     )
 
     logger.info("Loading the model...")
@@ -62,7 +62,7 @@ def main(args):
             f"Inferencing has completed. Text input: {text_input}. Sentiment: {humour_percent}"
         )
         response.text(f"Your joke is {humour_percent} funny.")
-        if humour_level > 0.5:
+        if humour_level >= 0.5:
             markdown = f"![]({GIF_FUNNY})"
 
         else:
