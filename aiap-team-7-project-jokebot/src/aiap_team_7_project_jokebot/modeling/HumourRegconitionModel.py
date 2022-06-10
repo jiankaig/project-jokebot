@@ -121,7 +121,7 @@ class HumourRecognitionModel:
         X = pd.DataFrame([joke], columns=["text"])
         X = self._compute_input_arrays(X, columns=columns, tokenizer=tokenizer)
         ypred = model.predict(X)
-        return self._evalPred(ypred, threhold=0.5)
+        return ypred
 
 
 def main():
