@@ -10,7 +10,7 @@ data
 logs
 aisg-context/k8s/pvc
 aisg-context/k8s/secrets
-
+models
 # Ignore .deb packages
 *.deb
 
