@@ -3,6 +3,9 @@
 set -x
 
 source ~/.bashrc
+
+python -m nltk.downloader punkt
+
 gcloud auth activate-service-account --key-file $GOOGLE_APPLICATION_CREDENTIALS
 
 if [ ! -d "$PRED_MODEL_PATH" ]; then
