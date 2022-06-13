@@ -23,11 +23,11 @@ spec:
           name: fastapi-server
           resources:
             requests:
-              memory: "4Gi"
-              cpu: "4"
+              memory: "16Gi"
+              cpu: "8"
             limits:
-              memory: "4Gi"
-              cpu: "4"
+              memory: "16Gi"
+              cpu: "8"
           ports:
             - containerPort: 8080
               name: fastapi-server
