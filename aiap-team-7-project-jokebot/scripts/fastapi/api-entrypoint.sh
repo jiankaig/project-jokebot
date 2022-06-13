@@ -13,4 +13,4 @@ if [ ! -d "$PRED_MODEL_PATH" ]; then
 fi
 
 cd src
-gunicorn aiap_team_7_project_jokebot_fastapi.main:APP -b 0.0.0.0:8080 -w 4 -k uvicorn.workers.UvicornWorker
+gunicorn aiap_team_7_project_jokebot_fastapi.main:APP -b 0.0.0.0:8080 -w 4 -k uvicorn.workers.UvicornWorker -t 6000
