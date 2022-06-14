@@ -38,7 +38,7 @@ def main():
     if get_humour_sentiment:
         logger.info("Conducting inferencing on text input...")
         waiting_text.text("Waiting for the slow model to provide a response...")
-        ret = requests.post("http://10.248.15.91:8080/api/v1/model/predict", json={'joke' : text_input}).json()
+        ret = requests.post("http://fastapi-server-team-7-svc:8080/api/v1/model/predict", json={'joke' : text_input}).json()
         humour_level = float(ret["data"].get("score"))
         print(f"humour_level:{humour_level}, type:{type(humour_level)}")
         waiting_text.text("")
