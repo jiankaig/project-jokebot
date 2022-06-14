@@ -1,4 +1,4 @@
-FROM nvidia/cuda:11.3.0-cudnn8-devel-ubuntu18.04
+FROM ubuntu:18.04
 
 SHELL ["/bin/bash", "-c"]
 
@@ -12,13 +12,10 @@ ARG CONDA_HOME="/miniconda3"
 ARG CONDA_BIN="$CONDA_HOME/bin/conda"
 ARG MINI_CONDA_SH="Miniconda3-latest-Linux-x86_64.sh"
 
-ARG PRED_MODEL_UUID
-RUN test -n "$PRED_MODEL_UUID"
 
-ARG PRED_MODEL_GCS_URI="gs://aiap-team-7-project-jokebot-artifacts/mlflow-tracking-server/team_7/$PRED_MODEL_UUID"
+ARG PRED_MODEL_GCS_URI="gs://aiap-team-7-project-jokebot/models"
+ARG PRED_MODEL_PATH="$HOME_DIR/$CONDA_ENV_NAME/models/colbert-trained"
 
-ARG PRED_MODEL_PATH="$HOME_DIR/from-gcs/$PRED_MODEL_UUID/artifacts/model/data/model"
-ENV PRED_MODEL_UUID=$PRED_MODEL_UUID
 ENV PRED_MODEL_GCS_URI=$PRED_MODEL_GCS_URI
 ENV PRED_MODEL_PATH=$PRED_MODEL_PATH
 
@@ -27,8 +24,6 @@ WORKDIR $HOME_DIR
 RUN groupadd -g 2222 $PROJECT_USER && useradd -u 2222 -g 2222 -m $PROJECT_USER
 
 RUN touch "$HOME_DIR/.bashrc"
-
-RUN apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/3bf863cc.pub
 
 RUN apt-get update && \
     apt-get -y install bzip2 curl wget gcc rsync git vim locales \

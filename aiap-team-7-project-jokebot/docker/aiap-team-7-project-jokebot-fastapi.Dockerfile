@@ -15,9 +15,9 @@ ARG MINI_CONDA_SH="Miniconda3-latest-Linux-x86_64.sh"
 ARG PRED_MODEL_UUID
 RUN test -n "$PRED_MODEL_UUID"
 
-ARG PRED_MODEL_GCS_URI="gs://aiap-team-7-project-jokebot-artifacts/mlflow-tracking-server/team_7/$PRED_MODEL_UUID"
+ARG PRED_MODEL_GCS_URI="gs://aiap-team-7-project-jokebot/models/$PRED_MODEL_UUID"
 
-ARG PRED_MODEL_PATH="$HOME_DIR/from-gcs/$PRED_MODEL_UUID/artifacts/model/data/model"
+ARG PRED_MODEL_PATH="$HOME_DIR/from-gcs/$PRED_MODEL_UUID"
 ENV PRED_MODEL_UUID=$PRED_MODEL_UUID
 ENV PRED_MODEL_GCS_URI=$PRED_MODEL_GCS_URI
 ENV PRED_MODEL_PATH=$PRED_MODEL_PATH

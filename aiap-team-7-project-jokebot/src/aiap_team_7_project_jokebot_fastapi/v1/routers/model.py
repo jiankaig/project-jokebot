@@ -3,24 +3,26 @@ import fastapi
 
 import aiap_team_7_project_jokebot_fastapi as jokebot_fapi
 
-
 logger = logging.getLogger(__name__)
 
 
 ROUTER = fastapi.APIRouter()
-PRED_MODEL = jokebot_fapi.deps.PRED_MODEL
+PRED_MODEL = jokebot_fapi.deps.PRED_MODEL_CUSTOM
 
 
 @ROUTER.post("/predict", status_code=fastapi.status.HTTP_200_OK)
-def predict_sentiment(movie_reviews_json: jokebot_fapi.schemas.MovieReviews):
+def predict_sentiment(joke_text: jokebot_fapi.schemas.InferJoke):
     """Endpoint that returns sentiment classification of movie review
     texts.
 
     Parameters
     ----------
-    movie_reviews_json : jokebot_fapi.schemas.MovieReviews
+    movie_reviews_json(deprecreted) : jokebot_fapi.schemas.MovieReviews
         'pydantic.BaseModel' object detailing the schema of the request
         body
+    
+    joke_text : jokebot_fapi.schemas.InferJoke of 'pydantic.BaseModel' class
+            detailing the schema of the request body
 
     Returns
     -------
@@ -34,28 +36,19 @@ def predict_sentiment(movie_reviews_json: jokebot_fapi.schemas.MovieReviews):
         A 500 status error is returned if the prediction steps
         encounters any errors.
     """
-    result_dict = {"data": []}
-
+    result=""
     try:
-        logger.info("Generating sentiments for movie reviews.")
-        movie_reviews_dict = movie_reviews_json.dict()
-        review_texts_array = movie_reviews_dict["reviews"]
-        for review_val in review_texts_array:
-            curr_pred_result = PRED_MODEL.predict([review_val["text"]])
-            sentiment = ("positive" if curr_pred_result > 0.5
-                        else "negative")
-            result_dict["data"].append(
-                {"review_id": review_val["id"], "sentiment": sentiment})
-            logger.info(
-                "Sentiment generated for Review ID: {}".
-                format(review_val["id"]))
+        logger.info("Generating humour sentiments for .")
+        logger.info(f"[DEBUG] joke: {joke_text.joke}")
+        score = PRED_MODEL.predict(joke_text.joke)
+        logger.info("Joke Sentiment generated for Humour ")
 
     except Exception as error:
         print(error)
         raise fastapi.HTTPException(
             status_code=500, detail="Internal server error.")
 
-    return result_dict
+    return {"data": {"score": str(score)}}
 
 
 @ROUTER.get("/version", status_code=fastapi.status.HTTP_200_OK)

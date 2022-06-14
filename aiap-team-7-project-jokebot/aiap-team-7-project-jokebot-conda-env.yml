@@ -4,6 +4,7 @@ channels:
   - conda-forge
 dependencies:
   - python=3.8.13
+  - scikit-learn=1.0.2
   - pip=22.0.4
   - pip:
     - pandas==1.1.5
@@ -29,3 +30,5 @@ dependencies:
     - streamlit==1.7.0
     - click==7.1.2
     - cruft==2.9.0
+    - transformers==4.19.3
+    - nltk==3.7

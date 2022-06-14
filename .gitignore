@@ -4,3 +4,7 @@ data/*
 
 src/__pycache__/jokes.cpython-39.pyc
 .ipynb_checkpoints/Untitled-1-jvsc-d07b4c2f-94d5-4fa0-a832-404f18306bab-checkpoint.ipynb
+models/*
+outputs/*
+.vscode/*
+*.pyc
