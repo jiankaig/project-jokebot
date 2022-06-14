@@ -1,9 +1,6 @@
 import os
 import logging
-import hydra
 import streamlit as st
-import uvicorn
-from PIL import Image
 import requests
 
 import aiap_team_7_project_jokebot as jokebot
@@ -17,8 +14,7 @@ def load_model(model_type, model_path):
     return jokebot.modeling.models.HumourRecognitionModel(model_type, model_path)
 
 
-@hydra.main(config_path="../conf/base", config_name="pipelines.yml")
-def main(args):
+def main():
     """This main function does the following:
     - load logging config
     - loads trained model on cache
@@ -28,11 +24,6 @@ def main(args):
     """
 
     logger = logging.getLogger(__name__)
-    logger.info("Setting up logging configuration.")
-    logger_config_path = os.path.join(
-        hydra.utils.get_original_cwd(), "conf/base/logging.yml"
-    )
-    jokebot.general_utils.setup_logging(logger_config_path)
 
     logger.info("Loading dashboard...")
     title = st.title("AIAP Team 7 Project Jokebot")
@@ -47,7 +38,7 @@ def main(args):
     if get_humour_sentiment:
         logger.info("Conducting inferencing on text input...")
         waiting_text.text("Waiting for the slow model to provide a response...")
-        ret = requests.post("http://127.0.0.1:8000/api/v1/model/predict", json={'joke' : text_input}).json()
+        ret = requests.post("http://10.248.15.91:8080/api/v1/model/predict", json={'joke' : text_input}).json()
         humour_level = float(ret["data"].get("score"))
         print(f"humour_level:{humour_level}, type:{type(humour_level)}")
         waiting_text.text("")

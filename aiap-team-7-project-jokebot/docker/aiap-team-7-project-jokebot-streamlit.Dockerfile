@@ -1,4 +1,4 @@
-FROM nvidia/cuda:11.3.0-cudnn8-devel-ubuntu18.04
+FROM ubuntu:18.04
 
 SHELL ["/bin/bash", "-c"]
 
@@ -24,8 +24,6 @@ WORKDIR $HOME_DIR
 RUN groupadd -g 2222 $PROJECT_USER && useradd -u 2222 -g 2222 -m $PROJECT_USER
 
 RUN touch "$HOME_DIR/.bashrc"
-
-RUN apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/3bf863cc.pub
 
 RUN apt-get update && \
     apt-get -y install bzip2 curl wget gcc rsync git vim locales \
@@ -70,6 +68,9 @@ RUN $CONDA_BIN env create -f aiap-team-7-project-jokebot/$CONDA_ENV_FILE && \
     $CONDA_BIN clean -a -y && \
     echo "source activate $CONDA_ENV_NAME" >> "$HOME_DIR/.bashrc"
 
+EXPOSE 8501
 
+WORKDIR $HOME_DIR/aiap-team-7-project-jokebot
+RUN chmod -R +x scripts
 
 ENTRYPOINT [ "/bin/bash", "./scripts/dashboard/streamlit-entrypoint.sh" ]
