@@ -68,6 +68,8 @@ RUN $CONDA_BIN env create -f aiap-team-7-project-jokebot/$CONDA_ENV_FILE && \
     $CONDA_BIN clean -a -y && \
     echo "source activate $CONDA_ENV_NAME" >> "$HOME_DIR/.bashrc"
 
+EXPOSE 8501
+
 WORKDIR $HOME_DIR/aiap-team-7-project-jokebot
 RUN chmod -R +x scripts
 
