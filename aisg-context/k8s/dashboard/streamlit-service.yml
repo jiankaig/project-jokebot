@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+
+  name: streamlit-team-7-svc
+
+spec:
+  ports:
+  - port: 8501
+  selector:
+
+    app: streamlit-team-7
+

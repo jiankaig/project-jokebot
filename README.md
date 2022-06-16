@@ -1,6 +1,6 @@
 <img src='./imgs/AIAP-Banner.png'>
 
-# Team 7 (FL Bricks)
+# Team 7 (FL Bricks) - aiap-team-7-project-jokebot
  This repo is used to document the mini-project for Team 7 (FL Bricks) where we deploy a pre-trained humour recognition model using a Streamlit app
 
  # Pipeline
