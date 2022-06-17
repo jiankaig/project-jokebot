@@ -5,7 +5,7 @@
 
  # Pipeline
 
- <img src='./imgs/flowchart.png'>
+ <img src='imgs/flowchart_v2.png'>
 
 # Resources
 - streamlit app: TODO
