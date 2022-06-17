@@ -1,4 +1,3 @@
-import sys
 import os
 import logging
 import streamlit as st
@@ -25,10 +24,6 @@ def main():
     - conducts inferencing on string
     - outputs prediction results on the dashboard
     """
-    print(sys.argv, len(sys.argv))
-    print(sys.argc, len(sys.argc))
-
-
     logger = logging.getLogger(__name__)
 
     logger.info("Loading dashboard...")

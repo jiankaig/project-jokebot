@@ -23,7 +23,7 @@ conda env update --name project-requirements --file project_requirements.yml --p
 ```
 
 ### Download pre-trained model
-download the model [here](https://mega.nz/folder/MmB1gIIT#8ilUTK1-BO80aoXxKOIhpg). unzip and place the folder "colbert-trained" under models in root directory of project, like so:
+download the model [here](https://mega.nz/folder/MmB1gIIT#8ilUTK1-BO80aoXxKOIhpg). unzip and place the folder "colbert-trained" under models(add "models" folder as well) in root directory of project, like so:
 ```
 project-jokebot
         .
@@ -53,11 +53,6 @@ From project's root directory:
 export PRED_MODEL_PATH=$PWD/models/colbert-trained && \
 export PRED_MODEL_UUID="colbert-trained"
 ```
-### To run frontend
-From project's root directory:
-```
-streamlit run src/streamlit.py             
-```
 
 ### To run backend
 From project's root directory:
@@ -65,11 +60,26 @@ From project's root directory:
 cd src
 gunicorn aiap_team_7_project_jokebot_fastapi.main:APP -b 0.0.0.0:8080 -w 2 -t 600 -k uvicorn.workers.UvicornWorker
 ```
+to access FastAPI's docs, simply go to [here](http://localhost:8080/docs)(in your browser)
+![](imgs/Screenshot-fastapi.png)
+
+### To run frontend
+From project's root directory:
+```
+streamlit run src/streamlit.py             
+```
+you should see a local web server opened in your browser like so:
+![](imgs/Screenshot-streamlit.png)
+
+
 ## Running locally via Docker Images
+before we deploy our applications on the cloud, we package scripts and modules as two seperate docker images. one to handle fronend user interface and another to another /predict requests coming from frontend
 
 ## Running on GKE
+after building docker image, and pushed to cloud(GCP. We deploy these containers on GKE. This was only possible given that a GKE cluster was allocated during the course of our mini project. However, it is possible to modify, build, push and deploy these containers on a linux VM elsewhere.    
 
 # Resources
+- [cookie cutter template](https://github.com/aimakerspace/ml-project-cookiecutter-gcp/blob/master/README.md) -  template consisting of boilerplate codes and well-written docs with instructions on how to use.
 - streamlit app: TODO
 - gsutil bucket: gs://aiap-team-7-project-jokebot 
 # Ground rules for project
