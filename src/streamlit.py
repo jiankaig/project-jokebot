@@ -1,3 +1,4 @@
+import sys
 import os
 import logging
 import streamlit as st
@@ -5,9 +6,11 @@ import requests
 
 import aiap_team_7_project_jokebot as jokebot
 
+FASTAPI_SERVER_IP = "localhost"
+# FASTAPI_SERVER_IP = "fastapi-server-team-7-svc"
+
 GIF_FUNNY = "https://i.gifer.com/4j.gif"
 GIF_UNFUNNY = "https://c.tenor.com/LI7vXH2DTuMAAAAC/the-office-michael-scott.gif"
-
 
 @st.cache(allow_output_mutation=True)
 def load_model(model_type, model_path):
@@ -22,6 +25,9 @@ def main():
     - conducts inferencing on string
     - outputs prediction results on the dashboard
     """
+    print(sys.argv, len(sys.argv))
+    print(sys.argc, len(sys.argc))
+
 
     logger = logging.getLogger(__name__)
 
@@ -38,7 +44,7 @@ def main():
     if get_humour_sentiment:
         logger.info("Conducting inferencing on text input...")
         waiting_text.text("Waiting for the slow model to provide a response...")
-        ret = requests.post("http://fastapi-server-team-7-svc:8080/api/v1/model/predict", json={'joke' : text_input}).json()
+        ret = requests.post(f"http://{FASTAPI_SERVER_IP}:8080/api/v1/model/predict", json={'joke' : text_input}).json()
         humour_level = float(ret["data"].get("score"))
         print(f"humour_level:{humour_level}, type:{type(humour_level)}")
         waiting_text.text("")

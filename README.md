@@ -7,6 +7,34 @@
 
  <img src='./imgs/flowchart.png'>
 
+# Deployment
+## Prerequisites
+- conda env
+- models folder
+- 
+## Deployment stages
+- Running locally
+- Running local docker images
+- Running on GKE
+
+## Running locally
+Our project runs the frontend on streamlit and backend on fastapi.
+
+
+### To run frontend
+```
+streamlit run src/streamlit.py             
+```
+
+### To run backend
+```
+cd src
+gunicorn aiap_team_7_project_jokebot_fastapi.main:APP -b 0.0.0.0:8080 -w 2 -t 600 -k uvicorn.workers.UvicornWorker
+```
+## Running locally via Docker Images
+
+## Running on GKE
+
 # Resources
 - streamlit app: TODO
 - gsutil bucket: gs://aiap-team-7-project-jokebot 
