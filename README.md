@@ -9,9 +9,36 @@
 
 # Deployment
 ## Prerequisites
-- conda env
-- models folder
-- 
+- miniconda or conda installed
+- pre-trained model downloaded into models directory
+
+### Setup conda environment
+From project root directory:
+```
+conda env create -f project_requirements.yml
+```
+To update conda env with subsquent changes to .yml, run:
+```
+conda env update --name project-requirements --file project_requirements.yml --prune
+```
+
+### Download pre-trained model
+download the model [here](https://mega.nz/folder/MmB1gIIT#8ilUTK1-BO80aoXxKOIhpg). unzip and place the folder "colbert-trained" under models in root directory of project, like so:
+```
+project-jokebot
+        .
+        .
+        .
+        |__scripts
+        |__models
+            |__colbert-trained
+        |__src
+        .
+        .
+        .
+```
+
+taken from: https://github.com/Moradnejad/ColBERT-Using-BERT-Sentence-Embedding-for-Humor-Detection
 ## Deployment stages
 - Running locally
 - Running local docker images
@@ -20,13 +47,20 @@
 ## Running locally
 Our project runs the frontend on streamlit and backend on fastapi.
 
-
+### prepare environment variables
+From project's root directory:
+```
+export PRED_MODEL_PATH=$PWD/models/colbert-trained && \
+export PRED_MODEL_UUID="colbert-trained"
+```
 ### To run frontend
+From project's root directory:
 ```
 streamlit run src/streamlit.py             
 ```
 
 ### To run backend
+From project's root directory:
 ```
 cd src
 gunicorn aiap_team_7_project_jokebot_fastapi.main:APP -b 0.0.0.0:8080 -w 2 -t 600 -k uvicorn.workers.UvicornWorker
