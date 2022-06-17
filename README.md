@@ -27,7 +27,11 @@ Project jokebot is a simple web-based application (using streamlit app) where it
 ![](https://j.gifs.com/mqVvKA.gif)
 
  ## Pipeline
- <img src='imgs/flowchart_v2.png'>
+
+<p align="center">
+  <img src='imgs/flowchart_v2.png' width="710" height="500" >
+</p>
+
 
 ## Deployment
 ### Prerequisites
