@@ -1,4 +1,5 @@
 import logging
+from aiap_team_7_project_jokebot_fastapi.deps import JOKE_GENERATOR
 import fastapi
 
 import aiap_team_7_project_jokebot_fastapi as jokebot_fapi
@@ -8,26 +9,22 @@ logger = logging.getLogger(__name__)
 
 ROUTER = fastapi.APIRouter()
 PRED_MODEL = jokebot_fapi.deps.PRED_MODEL_CUSTOM
+JOKE_GENERATOR = jokebot_fapi.deps.JOKE_GENERATOR
 
 
 @ROUTER.post("/predict", status_code=fastapi.status.HTTP_200_OK)
 def predict_sentiment(joke_text: jokebot_fapi.schemas.InferJoke):
-    """Endpoint that returns sentiment classification of movie review
-    texts.
+    """Endpoint that returns humour sentiment (float) of joke provided by user
 
     Parameters
     ----------
-    movie_reviews_json(deprecreted) : jokebot_fapi.schemas.MovieReviews
-        'pydantic.BaseModel' object detailing the schema of the request
-        body
-    
     joke_text : jokebot_fapi.schemas.InferJoke of 'pydantic.BaseModel' class
             detailing the schema of the request body
 
     Returns
     -------
     dict
-        Dictionary containing the sentiments for each movie review in
+        Dictionary containing the humour sentiment (score) for joke in
         the body of the request.
 
     Raises
@@ -36,7 +33,6 @@ def predict_sentiment(joke_text: jokebot_fapi.schemas.InferJoke):
         A 500 status error is returned if the prediction steps
         encounters any errors.
     """
-    result=""
     try:
         logger.info("Generating humour sentiments for .")
         logger.info(f"[DEBUG] joke: {joke_text.joke}")
@@ -45,10 +41,41 @@ def predict_sentiment(joke_text: jokebot_fapi.schemas.InferJoke):
 
     except Exception as error:
         print(error)
-        raise fastapi.HTTPException(
-            status_code=500, detail="Internal server error.")
+        raise fastapi.HTTPException(status_code=500, detail="Internal server error.")
 
     return {"data": {"score": str(score)}}
+
+
+@ROUTER.post("/generate-joke", status_code=fastapi.status.HTTP_200_OK)
+def generate_joke(pregen_text: jokebot_fapi.schemas.PreGenText):
+    """Endpoint that generate a 'joke' based on text provided by user
+
+    joke_text : jokebot_fapi.schemas.PreGenText of 'pydantic.BaseModel' class
+            detailing the schema of the request body
+
+    Returns
+    -------
+    dict
+        Dictionary containing the generated joke (str) in
+        the body of the request.
+
+    Raises
+    ------
+    fastapi.HTTPException
+        A 500 status error is returned if the prediction steps
+        encounters any errors.
+    """
+    try:
+        logger.info(f"Generating joke for {pregen_text.text}.")
+
+        generated_joke = JOKE_GENERATOR.generate_joke(pregen_text.text)
+        logger.info("Joke generated...")
+
+    except Exception as error:
+        print(error)
+        raise fastapi.HTTPException(status_code=500, detail="Internal server error.")
+
+    return {"data": {"generated_joke": generated_joke}}
 
 
 @ROUTER.get("/version", status_code=fastapi.status.HTTP_200_OK)
