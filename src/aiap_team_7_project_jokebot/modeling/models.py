@@ -4,7 +4,7 @@ import keras
 import pandas as pd
 import numpy as np
 import sklearn
-from transformers import BertTokenizer
+from transformers import BertTokenizer, pipeline
 from tqdm.notebook import tqdm
 import nltk
 
@@ -133,6 +133,14 @@ class HumourRecognitionModel:
         X = self._compute_input_arrays(X, columns=columns, tokenizer=tokenizer)
         ypred = model.predict(X)[0][0]
         return ypred
+
+
+class JokeGenerator:
+    def __init__(self, model, max_length) -> None:
+        self.generator = pipeline("text-generation", model=model, max_length=max_length)
+
+    def generate_joke(self, text):
+        return self.generator(text)[0]["generated_text"]
 
 
 def main():
