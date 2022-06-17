@@ -48,14 +48,14 @@ taken from: https://github.com/Moradnejad/ColBERT-Using-BERT-Sentence-Embedding-
 Our project runs the frontend on streamlit and backend on fastapi.
 
 ### prepare environment variables
-From project's root directory:
+From project's root directory run: 
 ```
 export PRED_MODEL_PATH=$PWD/models/colbert-trained && \
 export PRED_MODEL_UUID="colbert-trained"
 ```
 
 ### To run backend
-From project's root directory:
+From project's root directory run:
 ```
 cd src
 gunicorn aiap_team_7_project_jokebot_fastapi.main:APP -b 0.0.0.0:8080 -w 2 -t 600 -k uvicorn.workers.UvicornWorker
@@ -64,7 +64,7 @@ to access FastAPI's docs, simply go to [here](http://localhost:8080/docs)(in you
 ![](imgs/Screenshot-fastapi.png)
 
 ### To run frontend
-From project's root directory:
+From project's root directory run:
 ```
 streamlit run src/streamlit.py             
 ```
