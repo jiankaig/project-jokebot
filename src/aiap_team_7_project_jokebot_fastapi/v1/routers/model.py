@@ -1,5 +1,4 @@
 import logging
-from aiap_team_7_project_jokebot_fastapi.deps import JOKE_GENERATOR
 import fastapi
 
 import aiap_team_7_project_jokebot_fastapi as jokebot_fapi
@@ -42,7 +41,7 @@ def predict_sentiment(joke_text: jokebot_fapi.schemas.InferJoke):
         encounters any errors.
     """
     try:
-        logger.info("Generating humour sentiments for .")
+        logger.info(f"Generating humour sentiments for {joke_text.joke}")
         logger.info(f"[DEBUG] joke: {joke_text.joke}")
         score = MODELS["PRED_MODEL"].predict(joke_text.joke)
         logger.info("Joke Sentiment generated for Humour ")
