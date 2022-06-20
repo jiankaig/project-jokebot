@@ -32,3 +32,5 @@ dependencies:
     - cruft==2.9.0
     - transformers==4.19.3
     - nltk==3.7
+    - google-auth
+    - google-api-python-client

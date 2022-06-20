@@ -10,5 +10,8 @@ class Settings(pydantic.BaseSettings):
     PRED_MODEL_UUID: str
     PRED_MODEL_PATH: str
 
+    JOKE_GENERATION_MODEL: str = "huggingtweets/dadsaysjokes"
+    MAX_LENGTH: float = 100
+
 
 SETTINGS = Settings()
