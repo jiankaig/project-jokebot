@@ -11,6 +11,6 @@ PRED_MODEL_CUSTOM = jokebot.modeling.models.HumourRecognitionModel(
 )
 
 JOKE_GENERATOR = jokebot.modeling.models.JokeGenerator(
-    jokebot_fapi.config.SETTINGS.JOKE_GENERATION_MODEL,
+    jokebot_fapi.config.SETTINGS.JOKE_GENERATOR_MODEL,
     jokebot_fapi.config.SETTINGS.MAX_LENGTH,
 )
