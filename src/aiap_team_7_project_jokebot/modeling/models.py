@@ -140,7 +140,7 @@ class JokeGenerator:
         self.generator = pipeline("text-generation", model=model, max_length=max_length)
 
     def generate_joke(self, text):
-        return self.generator(text)[0]["generated_text"]
+        return self.generator(text, truncation=True)[0]["generated_text"]
 
 
 def main():

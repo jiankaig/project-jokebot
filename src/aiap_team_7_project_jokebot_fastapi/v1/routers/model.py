@@ -1,8 +1,8 @@
 import logging
-from aiap_team_7_project_jokebot_fastapi.deps import JOKE_GENERATOR
 import fastapi
 
 import aiap_team_7_project_jokebot_fastapi as jokebot_fapi
+from aiap_team_7_project_jokebot_fastapi.deps import JOKE_GENERATOR
 
 logger = logging.getLogger(__name__)
 
@@ -18,13 +18,17 @@ def predict_sentiment(joke_text: jokebot_fapi.schemas.InferJoke):
 
     Parameters
     ----------
+    movie_reviews_json(deprecreted) : jokebot_fapi.schemas.MovieReviews
+        'pydantic.BaseModel' object detailing the schema of the request
+        body
+
     joke_text : jokebot_fapi.schemas.InferJoke of 'pydantic.BaseModel' class
             detailing the schema of the request body
 
     Returns
     -------
     dict
-        Dictionary containing the humour sentiment (score) for joke in
+        Dictionary containing the sentiments for each movie review in
         the body of the request.
 
     Raises
@@ -33,8 +37,9 @@ def predict_sentiment(joke_text: jokebot_fapi.schemas.InferJoke):
         A 500 status error is returned if the prediction steps
         encounters any errors.
     """
+    result = ""
     try:
-        logger.info("Generating humour sentiments for .")
+        logger.info(f"Generating humour sentiments for {joke_text.joke}")
         logger.info(f"[DEBUG] joke: {joke_text.joke}")
         score = PRED_MODEL.predict(joke_text.joke)
         logger.info("Joke Sentiment generated for Humour ")
