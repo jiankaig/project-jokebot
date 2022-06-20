@@ -4,7 +4,7 @@ import keras
 import pandas as pd
 import numpy as np
 import sklearn
-from transformers import BertTokenizer, pipeline
+from transformers import BertTokenizer
 from tqdm.notebook import tqdm
 import nltk
 
@@ -135,6 +135,7 @@ class HumourRecognitionModel:
         return ypred
 
 
+<<<<<<< Updated upstream
 class JokeGenerator:
     def __init__(self, model, max_length) -> None:
         self.generator = pipeline("text-generation", model=model, max_length=max_length)
@@ -143,6 +144,8 @@ class JokeGenerator:
         return self.generator(text, truncation=True)[0]["generated_text"]
 
 
+=======
+>>>>>>> Stashed changes
 def main():
     X = "I invented a new word!\nPlagiarism!"
 
